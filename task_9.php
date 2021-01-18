@@ -56,7 +56,7 @@ if (isset($_POST['txt'])) {
                             <form action="task_9.php" method="post">
                                 <label class="form-label" for="simpleinput">Text</label>
                                 <input type="text" id="simpleinput" class="form-control" name="txt">
-                                <button class="btn btn-success mt-3">Submit</button>
+                                <button class="btn btn-success mt-3" type="submit">Submit</button>
                             </form>
                         </div>
                     </div>

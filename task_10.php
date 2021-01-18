@@ -1,5 +1,5 @@
 <?php
-$error = false;
+session_start();
 if (isset($_POST['txt'])) {
     try {
         $pdo = new PDO("mysql:host=localhost;dbname=marlin", "root", "", [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
@@ -12,14 +12,14 @@ if (isset($_POST['txt'])) {
     $statement = $pdo->prepare($query);
     $statement->execute($params);
     if ($statement->rowCount()) {
-        $error = true;
+        $_SESSION['danger'] = "Данная запись существует в таблице";
     } else {
         $query = "INSERT INTO text(comment) VALUES (:comment)";
         $params = ['comment' => $_POST['txt']];
         $statement = $pdo->prepare($query);
         $statement->execute($params);
         if ($statement->rowCount()) {
-            echo "данные записаны";
+            $_SESSION['success'] = "Данные успешно записаны в таблицу";
         }
     }
 }
@@ -63,14 +63,30 @@ if (isset($_POST['txt'])) {
                 <div class="panel-content">
                     <div class="panel-content">
                         <div class="form-group">
-                            <div class="alert alert-danger fade show <?php if(!$error) {echo "d-none";}?>" role="alert">
-
-                                You should check in on some of those fields below.
-                            </div>
+                            <?php
+                            if (isset($_SESSION['danger'])):
+                                ?>
+                                <div class="alert alert-danger fade show" role="alert">
+                                    <?= $_SESSION['danger'] ?>
+                                </div>
+                                <?php
+                                unset($_SESSION['danger']);
+                            endif;
+                            ?>
+                            <?php
+                            if (isset($_SESSION['success'])):
+                                ?>
+                                <div class="alert alert-success fade show" role="alert">
+                                    <?= $_SESSION['success'] ?>
+                                </div>
+                                <?php
+                                unset($_SESSION['success']);
+                            endif;
+                            ?>
                             <form action="task_10.php" method="post">
                                 <label class="form-label" for="simpleinput">Text</label>
                                 <input type="text" id="simpleinput" class="form-control" name="txt">
-                                <button class="btn btn-success mt-3">Submit</button>
+                                <button class="btn btn-success mt-3" type="submit">Submit</button>
                             </form>
                         </div>
                     </div>
