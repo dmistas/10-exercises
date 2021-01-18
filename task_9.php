@@ -8,11 +8,10 @@ if (isset($_POST['txt'])) {
     $query = "INSERT INTO text(comment) VALUES (:comment)";
     $params = ['comment' => $_POST['txt']];
     $statement = $pdo->prepare($query);
-    if ($statement->execute($params)) {
+    $statement->execute($params);
+    if ($statement->rowCount()) {
         echo "данные записаны";
     }
-
-
 }
 ?>
 <!DOCTYPE html>
