@@ -80,9 +80,7 @@
                         ];
                         foreach ($users as $user):
                             ?>
-                            <div class="<?php if ($user['banned']) {
-                                echo 'banned';
-                            } ?> rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
+                            <div class="<?php echo $user['banned']?'banned':'';?> rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
                                 <img src="<?= $user['img_src'] ?>" alt="<?= $user['name'] ?>"
                                      class="img-thumbnail img-responsive rounded-circle"
                                      style="width:5rem; height: 5rem;">

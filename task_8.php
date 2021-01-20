@@ -48,7 +48,7 @@
                             $sql = "SELECT * FROM accounts";
                             $statement = $pdo->prepare($sql);
                             $statement->execute();
-                            $peoples = $statement->fetchAll(PDO::FETCH_ASSOC);
+                            $people = $statement->fetchAll(PDO::FETCH_ASSOC);
                             ?>
                             <thead>
                             <tr>
@@ -61,18 +61,18 @@
                             </thead>
                             <tbody>
                             <?php
-                            foreach ($peoples as $people):
+                            foreach ($people as $person):
                                 ?>
                                 <tr>
                                     <th scope="row">1</th>
-                                    <td><?= $people['First Name'] ?></td>
-                                    <td><?= $people['Last Name'] ?></td>
-                                    <td><?= $people['Username'] ?></td>
+                                    <td><?= $person['First Name'] ?></td>
+                                    <td><?= $person['Last Name'] ?></td>
+                                    <td><?= $person['Username'] ?></td>
                                     <td>
-                                        <a href="show.php?id=<?= $people['id'] ?>"
+                                        <a href="show.php?id=<?= $person['id'] ?>"
                                            class="btn btn-info">Редактировать</a>
-                                        <a href="edit.php?id=<?= $people['id'] ?>" class="btn btn-warning">Изменить</a>
-                                        <a href="delete.php?id=<?= $people['id'] ?>" class="btn btn-danger">Удалить</a>
+                                        <a href="edit.php?id=<?= $person['id'] ?>" class="btn btn-warning">Изменить</a>
+                                        <a href="delete.php?id=<?= $person['id'] ?>" class="btn btn-danger">Удалить</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
